@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 10, 2024 alle 10:20
+-- Creato il: Apr 10, 2024 alle 10:28
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `esempio_webservice`
 --
+CREATE DATABASE IF NOT EXISTS `esempio_webservice` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `esempio_webservice`;
 
 -- --------------------------------------------------------
 
