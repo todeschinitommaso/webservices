@@ -10,6 +10,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verifica della connessione
 if ($conn->connect_error) {
+    http_response_code(500); // Errore interno del server
     die("Connessione fallita: " . $conn->connect_error);
 }
 
@@ -44,6 +45,7 @@ if ($method == 'GET') {
             $row = $result->fetch_assoc();
             echo json_encode($row);
         } else {
+            http_response_code(404); // Non trovato
             echo "Nessun risultato trovato con ID $id";
         }
     } elseif (count($array) == 3 && $array[2] == '') {
@@ -58,6 +60,7 @@ if ($method == 'GET') {
             }
             echo json_encode($rows);
         } else {
+            http_response_code(404); // Non trovato
             echo "Nessun risultato trovato nella tabella.";
         }
     } else {
@@ -79,9 +82,11 @@ if ($method == 'GET') {
         if ($stmt->execute()) {
             echo "Dati inseriti con successo.";
         } else {
+            http_response_code(500); // Errore interno del server
             echo "Errore durante l'inserimento dei dati.";
         }
     } else {
+        http_response_code(400); // Richiesta non valida
         echo "Dati non validi.";
     }
 } elseif ($method == 'PUT') {
@@ -101,12 +106,15 @@ if ($method == 'GET') {
             if ($stmt->execute()) {
                 echo "Dati aggiornati con successo.";
             } else {
+                http_response_code(500); // Errore interno del server
                 echo "Errore durante l'aggiornamento dei dati.";
             }
         } else {
+            http_response_code(400); // Richiesta non valida
             echo "Dati non validi.";
         }
     } else {
+        http_response_code(400); // Richiesta non valida
         echo "ID non specificato.";
     }
 } elseif ($method == 'DELETE') {
@@ -122,9 +130,11 @@ if ($method == 'GET') {
         if ($stmt->execute()) {
             echo "Dati cancellati con successo.";
         } else {
+            http_response_code(500); // Errore interno del server
             echo "Errore durante la cancellazione dei dati.";
         }
     } else {
+        http_response_code(400); // Richiesta non valida
         echo "ID non specificato.";
     }
 } else {
