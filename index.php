@@ -43,6 +43,7 @@ if ($method == 'GET') {
         
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
+            http_response_code(200); // Successo
             echo json_encode($row);
         } else {
             http_response_code(404); // Non trovato
@@ -58,6 +59,7 @@ if ($method == 'GET') {
             while ($row = $result->fetch_assoc()) {
                 $rows[] = $row;
             }
+            http_response_code(200); // Successo
             echo json_encode($rows);
         } else {
             http_response_code(404); // Non trovato
@@ -80,6 +82,7 @@ if ($method == 'GET') {
         $stmt->bind_param("sssis", $data['nome'], $data['cognome'], $data['email'], $data['eta'], $data['data_iscrizione']);
 
         if ($stmt->execute()) {
+            http_response_code(201); // Creato
             echo "Dati inseriti con successo.";
         } else {
             http_response_code(500); // Errore interno del server
@@ -104,6 +107,7 @@ if ($method == 'GET') {
             $stmt->bind_param("sssssi", $data['nome'], $data['cognome'], $data['email'], $data['eta'], $data['data_iscrizione'], $id);
 
             if ($stmt->execute()) {
+                http_response_code(200); // Successo
                 echo "Dati aggiornati con successo.";
             } else {
                 http_response_code(500); // Errore interno del server
@@ -128,6 +132,7 @@ if ($method == 'GET') {
         $stmt->bind_param("i", $id);
 
         if ($stmt->execute()) {
+            http_response_code(200); // Successo
             echo "Dati cancellati con successo.";
         } else {
             http_response_code(500); // Errore interno del server
